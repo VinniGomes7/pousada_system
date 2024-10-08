@@ -1,24 +1,22 @@
-# README
+# Pousada System
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Este README documenta os passos necessários para configurar e executar a aplicação Pousada System.
 
-Things you may want to cover:
+## Badge do Codacy
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7f0807259b1e4d1bbf7ce9b5acdb5bef)](https://app.codacy.com/gh/VinniGomes7/pousada_system/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
-* Ruby version
+## Ruby Version
+A aplicação foi desenvolvida utilizando Ruby versão **3.1.2**.
 
-* System dependencies
+## Dependências do Sistema
+Certifique-se de ter as seguintes dependências instaladas:
+- Ruby
+- Rails
+- PostgreSQL
 
-* Configuration
+## Configuração
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/VinniGomes7/pousada_system.git
+   cd pousada_system

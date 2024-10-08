@@ -1,0 +1,7 @@
+version: 2
+analysis:
+  tools:
+    rubocop:
+      enabled: true
+    rails_best_practices:
+      enabled: true
