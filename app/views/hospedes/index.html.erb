@@ -1,0 +1,33 @@
+<h1>Lista de Hóspedes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Documento</th>
+      <th>Email</th>
+      <th>Telefone</th>
+      <th>Endereço</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hospedes.each do |hospede| %>
+      <tr>
+        <td><%= hospede.nome %></td>
+        <td><%= hospede.documento %></td>
+        <td><%= hospede.email %></td>
+        <td><%= hospede.telefone %></td>
+        <td><%= hospede.endereco %></td>
+        <td>
+          <%= link_to 'Mostrar', hospede %>
+          <%= link_to 'Editar', edit_hospede_path(hospede) %>
+          <%= link_to 'Deletar', hospede, method: :delete, data: { confirm: 'Você tem certeza?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Novo Hóspede', new_hospede_path %>

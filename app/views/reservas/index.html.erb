@@ -1,0 +1,31 @@
+<h1>Lista de Reservas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Hóspede</th>
+      <th>Quarto</th>
+      <th>Data de Entrada</th>
+      <th>Data de Saída</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reservas.each do |reserva| %>
+      <tr>
+        <td><%= reserva.hospede.nome %></td>
+        <td><%= reserva.quarto.numero %></td>
+        <td><%= reserva.data_entrada %></td>
+        <td><%= reserva.data_saida %></td>
+        <td>
+          <%= link_to 'Mostrar', reserva %>
+          <%= link_to 'Editar', edit_reserva_path(reserva) %>
+          <%= link_to 'Deletar', reserva, method: :delete, data: { confirm: 'Você tem certeza?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Nova Reserva', new_reserva_path %>

@@ -1,0 +1,27 @@
+<%= form_with(model: reserva, local: true) do |form| %>
+  <div>
+    <%= form.label :hospede_id, "Hóspede" %>
+    <%= form.collection_select :hospede_id, Hospede.all, :id, :nome %>
+  </div>
+
+  <div>
+    <%= form.label :quarto_id, "Quarto" %>
+    <%= form.collection_select :quarto_id, Quarto.all, :id, :numero %>
+  </div>
+
+  <div>
+    <%= form.label :data_entrada %>
+    <%= form.date_select :data_entrada %>
+  </div>
+
+  <div>
+    <%= form.label :data_saida %>
+    <%= form.date_select :data_saida %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Voltar', reservas_path %>

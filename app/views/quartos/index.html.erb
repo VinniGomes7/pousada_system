@@ -1,0 +1,29 @@
+<h1>Lista de Quartos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Número</th>
+      <th>Descrição</th>
+      <th>Preço por Diária</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @quartos.each do |quarto| %>
+      <tr>
+        <td><%= quarto.numero %></td>
+        <td><%= quarto.descricao %></td>
+        <td><%= quarto.preco_diaria %></td>
+        <td>
+          <%= link_to 'Mostrar', quarto %>
+          <%= link_to 'Editar', edit_quarto_path(quarto) %>
+          <%= link_to 'Deletar', quarto, method: :delete, data: { confirm: 'Você tem certeza?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Novo Quarto', new_quarto_path %>

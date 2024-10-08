@@ -1,0 +1,33 @@
+<h1>Lista de Funcionários</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Documento</th>
+      <th>Email</th>
+      <th>Telefone</th>
+      <th>Cargo</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @funcionarios.each do |funcionario| %>
+      <tr>
+        <td><%= funcionario.nome %></td>
+        <td><%= funcionario.documento %></td>
+        <td><%= funcionario.email %></td>
+        <td><%= funcionario.telefone %></td>
+        <td><%= funcionario.cargo %></td>
+        <td>
+          <%= link_to 'Mostrar', funcionario %>
+          <%= link_to 'Editar', edit_funcionario_path(funcionario) %>
+          <%= link_to 'Deletar', funcionario, method: :delete, data: { confirm: 'Você tem certeza?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Novo Funcionário', new_funcionario_path %>

@@ -1,0 +1,8 @@
+<h1><%= @hospede.nome %></h1>
+<p><strong>Documento:</strong> <%= @hospede.documento %></p>
+<p><strong>Email:</strong> <%= @hospede.email %></p>
+<p><strong>Telefone:</strong> <%= @hospede.telefone %></p>
+<p><strong>Endereço:</strong> <%= @hospede.endereco %></p>
+
+<%= link_to 'Editar', edit_hospede_path(@hospede) %>
+<%= link_to 'Voltar', hospedes_path %>
