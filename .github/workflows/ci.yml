@@ -9,6 +9,21 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: pousada_system_development
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: adm123
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -23,8 +38,11 @@ jobs:
           gem install bundler
           bundle install
 
+      - name: Setup database
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:migrate
+
       - name: Run tests
         run: |
-          bundle exec rake db:create
-          bundle exec rake db:migrate
           bundle exec rspec
