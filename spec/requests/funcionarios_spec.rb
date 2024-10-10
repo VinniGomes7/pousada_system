@@ -42,7 +42,7 @@ RSpec.describe "/funcionarios", type: :request do
 
       it "redireciona para o funcionário criado" do
         post funcionarios_url, params: { funcionario: valid_attributes }
-        expect(response).to redirect_to(funcionario_url(assigns(:funcionario)))
+        expect(response).to redirect_to(funcionario_url(Funcionario.last))
       end
     end
 
@@ -55,8 +55,7 @@ RSpec.describe "/funcionarios", type: :request do
 
       it "renderiza uma resposta bem-sucedida (ou seja, para exibir o template 'new')" do
         post funcionarios_url, params: { funcionario: invalid_attributes }
-        expect(response).to be_successful
-        expect(response.body).to include("Novo Funcionário")
+        expect(response).to render_template(:new) # Alterado para renderizar o template
       end
     end
   end
@@ -85,8 +84,7 @@ RSpec.describe "/funcionarios", type: :request do
       it "renderiza uma resposta bem-sucedida (ou seja, para exibir o template 'edit')" do
         funcionario = Funcionario.create! valid_attributes
         patch funcionario_url(funcionario), params: { funcionario: invalid_attributes }
-        expect(response).to be_successful
-        expect(response.body).to include("Editar Funcionário")
+        expect(response).to render_template(:edit) # Alterado para renderizar o template
       end
     end
   end

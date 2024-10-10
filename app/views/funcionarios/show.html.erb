@@ -5,5 +5,5 @@
 <p><strong>Telefone:</strong> <%= @resource.telefone %></p>
 <p><strong>Cargo:</strong> <%= @resource.cargo %></p>
 
-<%= link_to 'Editar', edit_funcionario_path(@resource) %> |
+<%= link_to 'Editar', edit_funcionario_path(@resource), class: 'btn btn-primary' %> |
 <%= link_to 'Voltar', funcionarios_path %>

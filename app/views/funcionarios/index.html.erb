@@ -22,12 +22,12 @@
         <td><%= funcionario.cargo %></td>
         <td>
           <%= link_to 'Mostrar', funcionario %>
-          <%= link_to 'Editar', edit_funcionario_path(funcionario) %>
-          <%= link_to 'Deletar', funcionario, method: :delete, data: { confirm: 'Tem certeza?' } %>
+          <%= link_to 'Editar', edit_funcionario_path(funcionario), class: 'btn btn-warning' %>
+          <%= link_to 'Deletar', funcionario, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Novo Funcionário', new_funcionario_path %>
+<%= link_to 'Novo Funcionário', new_funcionario_path, class: 'btn btn-success' %>

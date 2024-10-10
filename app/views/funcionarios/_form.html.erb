@@ -2,28 +2,27 @@
   <% if @funcionario.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@funcionario.errors.count, "erro") %> impediram que este funcionário fosse salvo:</h2>
-
       <ul>
-      <% @funcionario.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @funcionario.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
   <div class="field">
     <%= form.label :nome %>
-    <%= form.text_field :nome %>
+    <%= form.text_field :nome, required: true %>
   </div>
 
   <div class="field">
     <%= form.label :documento %>
-    <%= form.text_field :documento %>
+    <%= form.text_field :documento, required: true %>
   </div>
 
   <div class="field">
     <%= form.label :email %>
-    <%= form.email_field :email %>
+    <%= form.email_field :email, required: true %>
   </div>
 
   <div class="field">

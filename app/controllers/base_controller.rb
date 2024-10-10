@@ -17,7 +17,7 @@ class BaseController < ApplicationController
     if @resource.save
       redirect_to @resource, notice: "#{resource_class.name} criado(a) com sucesso."
     else
-      render :new, status: :unprocessable_entity  # Adiciona o status 422 aqui
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -29,7 +29,7 @@ class BaseController < ApplicationController
     if @resource.update(resource_params)
       redirect_to @resource, notice: "#{resource_class.name} atualizado(a) com sucesso."
     else
-      render :edit, status: :unprocessable_entity  # Adiciona o status 422 aqui
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -48,7 +48,8 @@ class BaseController < ApplicationController
     controller_name.classify.constantize
   end
 
+  # Tornar esse método obrigatório para sobrescrever nos controladores filhos
   def resource_params
-    {}
+    raise NotImplementedError, "Você precisa sobrescrever o método resource_params no controlador #{controller_name}"
   end
 end

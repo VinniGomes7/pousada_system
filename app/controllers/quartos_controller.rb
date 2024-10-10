@@ -1,21 +1,5 @@
 class QuartosController < BaseController
-  def create
-    @quarto = Quarto.new(resource_params)
-    if @quarto.save
-      redirect_to quarto_path(@quarto), notice: 'Quarto criado com sucesso.'
-    else
-      render :new
-    end
-  end
-  
-  def update
-    @quarto = Quarto.find(params[:id])
-    if @quarto.update(resource_params)
-      redirect_to quarto_path(@quarto), notice: 'Quarto atualizado com sucesso.'
-    else
-      render :edit
-    end
-  end  
+  before_action :set_resource, only: [:show, :edit, :update, :destroy]
 
   private
 

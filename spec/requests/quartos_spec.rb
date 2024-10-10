@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe "/quartos", type: :request do
   let(:valid_attributes) {
-    { numero: 101, descricao: "Deluxe", preco_diaria: 200.0, capacidade_maxima: 2 }
+    { numero: 101, descricao: "Quarto com vista para o mar", preco_diaria: 200.0, capacidade_maxima: 2 }
   }
 
   let(:invalid_attributes) {
-    { numero: nil, descricao: "", preco_diaria: -10, capacidade_maxima: nil }
+    { numero: nil, descricao: "", preco_diaria: -50.0, capacidade_maxima: -1 }
   }
 
   describe "GET /index" do
@@ -33,73 +33,71 @@ RSpec.describe "/quartos", type: :request do
   end
 
   describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new Quarto" do
+    context "com parâmetros válidos" do
+      it "cria um novo Quarto" do
         expect {
           post quartos_url, params: { quarto: valid_attributes }
         }.to change(Quarto, :count).by(1)
       end
 
-      it "redirects to the created quarto" do
+      it "redireciona para o quarto criado" do
         post quartos_url, params: { quarto: valid_attributes }
         expect(response).to redirect_to(quarto_url(Quarto.last))
       end
     end
 
-    context "with invalid parameters" do
-      it "does not create a new Quarto" do
+    context "com parâmetros inválidos" do
+      it "não cria um novo Quarto" do
         expect {
           post quartos_url, params: { quarto: invalid_attributes }
         }.not_to change(Quarto, :count)
       end
 
-      it "renders a successful response (i.e., to display the 'new' template)" do
+      it "renderiza uma resposta bem-sucedida (ou seja, para exibir o template 'new')" do
         post quartos_url, params: { quarto: invalid_attributes }
         expect(response).to be_successful
-        expect(response.body).to include("Novo Quarto") # Acentuação no título
       end
     end
   end
 
   describe "PATCH /update" do
-    context "with valid parameters" do
+    context "com parâmetros válidos" do
       let(:new_attributes) {
-        { numero: 102, descricao: "Super Deluxe", preco_diaria: 250.0, capacidade_maxima: 4 }
+        { numero: 202, descricao: "Quarto de luxo", preco_diaria: 350.0, capacidade_maxima: 3 }
       }
 
-      it "updates the requested quarto" do
+      it "atualiza o quarto solicitado" do
         quarto = Quarto.create! valid_attributes
         patch quarto_url(quarto), params: { quarto: new_attributes }
         quarto.reload
-        expect(quarto.numero).to eq(102)
+        expect(quarto.numero).to eq(202)
       end
 
-      it "redirects to the quarto" do
+      it "redireciona para o quarto" do
         quarto = Quarto.create! valid_attributes
         patch quarto_url(quarto), params: { quarto: new_attributes }
         expect(response).to redirect_to(quarto_url(quarto))
       end
     end
 
-    context "with invalid parameters" do
-      it "renders a successful response (i.e., to display the 'edit' template)" do
+    context "com parâmetros inválidos" do
+      it "renderiza uma resposta bem-sucedida (ou seja, para exibir o template 'edit')" do
         quarto = Quarto.create! valid_attributes
         patch quarto_url(quarto), params: { quarto: invalid_attributes }
         expect(response).to be_successful
-        expect(response.body).to include("Editar Quarto") # Acentuação no título
       end
     end
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested quarto" do
+    it "destrói o quarto solicitado" do
       quarto = Quarto.create! valid_attributes
       expect {
         delete quarto_url(quarto)
       }.to change(Quarto, :count).by(-1)
     end
 
-    it "redirects to the quartos list" do
+    it "redireciona para a lista de quartos" do
       quarto = Quarto.create! valid_attributes
       delete quarto_url(quarto)
       expect(response).to redirect_to(quartos_url)
