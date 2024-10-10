@@ -1,5 +1,5 @@
 class FuncionariosController < ApplicationController
-  before_action :set_funcionario, only: [:show, :edit, :update, :destroy]
+  before_action :set_funcionario, only: [:show, :edit, :update, :destroy, :confirm_delete]
 
   def index
     @funcionarios = Funcionario.all
@@ -30,6 +30,10 @@ class FuncionariosController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def confirm_delete
+    # Renderiza a página de confirmação de exclusão
   end
 
   def destroy

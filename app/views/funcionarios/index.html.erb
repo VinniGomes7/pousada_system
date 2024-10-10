@@ -15,7 +15,7 @@
   </thead>
 
   <tbody>
-  <% @funcionarios.each do |funcionario| %>
+    <% @funcionarios.each do |funcionario| %>
       <tr>
         <td><%= funcionario.nome %></td>
         <td><%= funcionario.documento %></td>
@@ -25,7 +25,7 @@
         <td>
           <%= link_to 'Mostrar', funcionario %>
           <%= link_to 'Editar', edit_funcionario_path(funcionario), class: 'btn btn-warning' %>
-          <%= link_to 'Deletar', funcionario, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %>
+          <%= link_to 'Deletar', confirm_delete_funcionario_path(funcionario), class: 'btn btn-danger' %>
         </td>
       </tr>
     <% end %>

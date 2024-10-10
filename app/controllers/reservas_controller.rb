@@ -1,5 +1,5 @@
 class ReservasController < ApplicationController
-  before_action :set_reserva, only: [:show, :edit, :update, :destroy]
+  before_action :set_reserva, only: [:show, :edit, :update, :destroy, :confirm_delete]
 
   def index
     @reservas = Reserva.all
@@ -30,6 +30,9 @@ class ReservasController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def confirm_delete
   end
 
   def destroy

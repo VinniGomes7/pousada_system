@@ -1,5 +1,5 @@
 class HospedesController < ApplicationController
-  before_action :set_hospede, only: [:show, :edit, :update, :destroy]
+  before_action :set_hospede, only: [:show, :edit, :update, :destroy, :confirm_delete]
 
   def index
     @hospedes = Hospede.all
@@ -30,6 +30,10 @@ class HospedesController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def confirm_delete
+    # Este método só renderiza a página de confirmação
   end
 
   def destroy

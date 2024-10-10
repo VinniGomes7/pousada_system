@@ -1,0 +1,9 @@
+<h1>Confirmação de Exclusão</h1>
+
+<p>Tem certeza de que deseja excluir o usuário <strong><%= @resource.nome %></strong>?</p>
+
+<%= form_with model: @resource, url: user_path(@resource), method: :delete do %>
+  <%= submit_tag 'Sim, excluir', data: { confirm: 'Você tem certeza?' } %>
+<% end %>
+
+<%= link_to 'Não, voltar', users_path, class: 'btn btn-secondary' %>

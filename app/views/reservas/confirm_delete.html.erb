@@ -1,0 +1,9 @@
+<h1>Confirmação de Exclusão</h1>
+
+<p>Tem certeza de que deseja excluir a reserva de <strong><%= @reserva.hospede.nome %></strong> no quarto <strong><%= @reserva.quarto.numero %></strong>?</p>
+
+<%= form_with model: @reserva, url: reserva_path(@reserva), method: :delete do %>
+  <%= submit_tag 'Sim, excluir', data: { confirm: 'Você tem certeza?' } %>
+<% end %>
+
+<%= link_to 'Não, voltar', reservas_path, class: 'btn btn-secondary' %>

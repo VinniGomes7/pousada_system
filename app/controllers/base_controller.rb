@@ -1,5 +1,5 @@
 class BaseController < ApplicationController
-  before_action :set_resource, only: [:show, :edit, :update, :destroy]
+  before_action :set_resource, only: [:show, :edit, :update, :destroy, :confirm_delete]
 
   def index
     @resources = resource_class.all
@@ -35,6 +35,10 @@ class BaseController < ApplicationController
   def destroy
     @resource.destroy
     redirect_to url_for(controller: controller_name), notice: "#{resource_class.name} removido(a) com sucesso."
+  end
+
+  def confirm_delete
+    # Renderiza uma página de confirmação de exclusão
   end
 
   private

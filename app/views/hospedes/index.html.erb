@@ -24,7 +24,7 @@
         <td><%= hospede.endereco %></td>
         <td><%= link_to 'Mostrar', hospede %></td>
         <td><%= link_to 'Editar', edit_hospede_path(hospede) %></td>
-        <td><%= link_to 'Remover', hospede, method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
+        <td><%= link_to 'Remover', confirm_delete_hospede_path(hospede) %></td>
       </tr>
     <% end %>
   </tbody>

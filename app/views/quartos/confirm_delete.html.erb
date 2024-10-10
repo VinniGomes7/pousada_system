@@ -1,0 +1,9 @@
+<h1>Confirmação de Exclusão</h1>
+
+<p>Tem certeza de que deseja excluir o quarto número <strong><%= @quarto.numero %></strong>?</p>
+
+<%= form_with model: @quarto, url: quarto_path(@quarto), method: :delete do %>
+  <%= submit_tag 'Sim, excluir', data: { confirm: 'Você tem certeza?' } %>
+<% end %>
+
+<%= link_to 'Não, voltar', quartos_path, class: 'btn btn-secondary' %>

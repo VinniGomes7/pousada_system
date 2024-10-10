@@ -21,7 +21,7 @@
         <td>
           <%= link_to 'Mostrar', quarto %>
           <%= link_to 'Editar', edit_quarto_path(quarto) %>
-          <%= link_to 'Deletar', quarto, method: :delete, data: { confirm: 'Tem certeza?' } %>
+          <%= link_to 'Deletar', confirm_delete_quarto_path(quarto), class: 'btn btn-danger' %>
         </td>
       </tr>
     <% end %>

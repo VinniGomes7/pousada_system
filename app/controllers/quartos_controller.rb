@@ -1,5 +1,5 @@
 class QuartosController < ApplicationController
-  before_action :set_quarto, only: [:show, :edit, :update, :destroy]
+  before_action :set_quarto, only: [:show, :edit, :update, :destroy, :confirm_delete]
 
   def index
     @quartos = Quarto.all
@@ -30,6 +30,9 @@ class QuartosController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def confirm_delete
   end
 
   def destroy
