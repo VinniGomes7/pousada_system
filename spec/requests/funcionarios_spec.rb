@@ -55,7 +55,7 @@ RSpec.describe "/funcionarios", type: :request do
 
       it "renderiza uma resposta bem-sucedida (ou seja, para exibir o template 'new')" do
         post funcionarios_url, params: { funcionario: invalid_attributes }
-        expect(response).to render_template(:new) # Alterado para renderizar o template
+        expect(response).to render_template(:new)
       end
     end
   end
@@ -84,7 +84,7 @@ RSpec.describe "/funcionarios", type: :request do
       it "renderiza uma resposta bem-sucedida (ou seja, para exibir o template 'edit')" do
         funcionario = Funcionario.create! valid_attributes
         patch funcionario_url(funcionario), params: { funcionario: invalid_attributes }
-        expect(response).to render_template(:edit) # Alterado para renderizar o template
+        expect(response).to render_template(:edit)
       end
     end
   end

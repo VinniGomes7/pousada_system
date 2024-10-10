@@ -20,7 +20,7 @@ RSpec.describe "/quartos", type: :request do
   describe "GET /new" do
     it "renders a successful response" do
       get new_quarto_url
-      expect(response).to be_successful
+      expect(response.body).to include("Novo Quarto")
     end
   end
 
@@ -28,7 +28,7 @@ RSpec.describe "/quartos", type: :request do
     it "renders a successful response" do
       quarto = Quarto.create! valid_attributes
       get edit_quarto_url(quarto)
-      expect(response).to be_successful
+      expect(response.body).to include("Editar Quarto")
     end
   end
 
@@ -55,7 +55,7 @@ RSpec.describe "/quartos", type: :request do
 
       it "renderiza uma resposta bem-sucedida (ou seja, para exibir o template 'new')" do
         post quartos_url, params: { quarto: invalid_attributes }
-        expect(response).to be_successful
+        expect(response.body).to include("Novo Quarto")
       end
     end
   end
@@ -84,7 +84,7 @@ RSpec.describe "/quartos", type: :request do
       it "renderiza uma resposta bem-sucedida (ou seja, para exibir o template 'edit')" do
         quarto = Quarto.create! valid_attributes
         patch quarto_url(quarto), params: { quarto: invalid_attributes }
-        expect(response).to be_successful
+        expect(response.body).to include("Editar Quarto")
       end
     end
   end

@@ -58,10 +58,6 @@ RSpec.describe "/hospedes", type: :request do
         expect {
           post hospedes_url, params: { hospede: valid_attributes }
         }.to change(Hospede, :count).by(1)
-      end
-
-      it "redireciona para o hóspede criado" do
-        post hospedes_url, params: { hospede: valid_attributes }
         expect(response).to redirect_to(hospede_url(Hospede.last))
       end
     end
@@ -71,12 +67,8 @@ RSpec.describe "/hospedes", type: :request do
         expect {
           post hospedes_url, params: { hospede: invalid_attributes }
         }.to change(Hospede, :count).by(0)
-      end
 
-      it "renderiza a página de novo com sucesso" do
-        post hospedes_url, params: { hospede: invalid_attributes }
-        expect(response).to be_successful
-        expect(response.body).to include("Novo Hóspede") # Acentuação no título
+        expect(response).to render_template(:new)
       end
     end
   end
@@ -84,23 +76,17 @@ RSpec.describe "/hospedes", type: :request do
   describe "PATCH /update" do
     context "com parâmetros válidos" do
       let(:new_attributes) {
-        {
-          nome: "João Atualizado",
-          documento: "98765432100",
-          email: "joao.atualizado@example.com",
-          telefone: "11888888888",
-          endereco: "Rua B, 456, Rio de Janeiro"
-        }
+        { nome: "Carlos Silva" }
       }
 
       it "atualiza o hóspede solicitado" do
         hospede = Hospede.create! valid_attributes
         patch hospede_url(hospede), params: { hospede: new_attributes }
         hospede.reload
-        expect(hospede.nome).to eq("João Atualizado")
+        expect(hospede.nome).to eq("Carlos Silva")
       end
 
-      it "redireciona para o hóspede atualizado" do
+      it "redireciona para o hóspede" do
         hospede = Hospede.create! valid_attributes
         patch hospede_url(hospede), params: { hospede: new_attributes }
         expect(response).to redirect_to(hospede_url(hospede))
@@ -108,17 +94,16 @@ RSpec.describe "/hospedes", type: :request do
     end
 
     context "com parâmetros inválidos" do
-      it "não atualiza o hóspede" do
+      it "renderiza uma resposta bem-sucedida (ou seja, para exibir o template 'edit')" do
         hospede = Hospede.create! valid_attributes
         patch hospede_url(hospede), params: { hospede: invalid_attributes }
-        expect(response).to be_successful
-        expect(response.body).to include("Editar Hóspede") # Acentuação no título
+        expect(response).to render_template(:edit)
       end
     end
   end
 
   describe "DELETE /destroy" do
-    it "remove o hóspede solicitado" do
+    it "destrói o hóspede solicitado" do
       hospede = Hospede.create! valid_attributes
       expect {
         delete hospede_url(hospede)

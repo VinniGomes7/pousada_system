@@ -22,7 +22,6 @@ class BaseController < ApplicationController
   end
 
   def edit
-    # @resource já será configurado pelo before_action :set_resource
   end
 
   def update
@@ -48,7 +47,6 @@ class BaseController < ApplicationController
     controller_name.classify.constantize
   end
 
-  # Tornar esse método obrigatório para sobrescrever nos controladores filhos
   def resource_params
     raise NotImplementedError, "Você precisa sobrescrever o método resource_params no controlador #{controller_name}"
   end

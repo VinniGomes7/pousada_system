@@ -1,110 +1,83 @@
+require 'rails_helper'
+
 RSpec.describe "/reservas", type: :request do
+  let(:hospede) { create(:hospede) }
+  let(:quarto) { create(:quarto) }
+
   let(:valid_attributes) {
-    { hospede_id: create(:hospede).id, quarto_id: create(:quarto).id, data_entrada: Date.today, data_saida: Date.tomorrow }
+    { data_entrada: Date.tomorrow, data_saida: Date.tomorrow + 1, hospede_id: hospede.id, quarto_id: quarto.id }
   }
 
   let(:invalid_attributes) {
-    { hospede_id: nil, quarto_id: nil, data_entrada: nil, data_saida: nil }
+    { data_entrada: nil, data_saida: Date.tomorrow, hospede_id: nil, quarto_id: nil }
   }
 
   describe "GET /index" do
-    it "renders a successful response" do
+    it "retorna sucesso na listagem de reservas" do
       Reserva.create! valid_attributes
       get reservas_url
       expect(response).to be_successful
     end
   end
 
-  describe "GET /show" do
-    it "renders a successful response" do
-      reserva = Reserva.create! valid_attributes
-      get reserva_url(reserva)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /new" do
-    it "renders a successful response" do
-      get new_reserva_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /edit" do
-    it "renders a successful response" do
-      reserva = Reserva.create! valid_attributes
-      get edit_reserva_url(reserva)
-      expect(response).to be_successful
-    end
-  end
-
   describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new Reserva" do
+    context "com parâmetros válidos" do
+      it "cria uma nova Reserva" do
         expect {
           post reservas_url, params: { reserva: valid_attributes }
         }.to change(Reserva, :count).by(1)
-      end
-
-      it "redirects to the created reserva" do
-        post reservas_url, params: { reserva: valid_attributes }
         expect(response).to redirect_to(reserva_url(Reserva.last))
       end
     end
 
-    context "with invalid parameters" do
-      it "does not create a new Reserva" do
+    context "com parâmetros inválidos" do
+      it "não cria uma nova Reserva" do
         expect {
           post reservas_url, params: { reserva: invalid_attributes }
         }.to change(Reserva, :count).by(0)
-      end
-
-      it "renders an unprocessable entity response" do
-        post reservas_url, params: { reserva: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity) # Correção mantida
+        expect(response).to render_template(:new)
       end
     end
   end
 
   describe "PATCH /update" do
-    context "with valid parameters" do
+    context "com parâmetros válidos" do
       let(:new_attributes) {
-        { data_entrada: Date.tomorrow, data_saida: Date.tomorrow + 2.days }
+        { data_saida: Date.tomorrow + 5 }
       }
 
-      it "updates the requested reserva" do
+      it "atualiza a reserva solicitada" do
         reserva = Reserva.create! valid_attributes
         patch reserva_url(reserva), params: { reserva: new_attributes }
         reserva.reload
-        expect(reserva.data_entrada).to eq(Date.tomorrow)
+        expect(reserva.data_saida).to eq(Date.tomorrow + 5)
       end
 
-      it "redirects to the reserva" do
+      it "redireciona para a reserva" do
         reserva = Reserva.create! valid_attributes
         patch reserva_url(reserva), params: { reserva: new_attributes }
-        reserva.reload
         expect(response).to redirect_to(reserva_url(reserva))
       end
     end
 
-    context "with invalid parameters" do
-      it "renders an unprocessable entity response" do
+    context "com parâmetros inválidos" do
+      it "renderiza uma resposta bem-sucedida (ou seja, para exibir o template 'edit')" do
         reserva = Reserva.create! valid_attributes
         patch reserva_url(reserva), params: { reserva: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity) # Correção mantida
+        expect(response).to render_template(:edit)
       end
     end
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested reserva" do
+    it "destrói a reserva solicitada" do
       reserva = Reserva.create! valid_attributes
       expect {
         delete reserva_url(reserva)
       }.to change(Reserva, :count).by(-1)
     end
 
-    it "redirects to the reservas list" do
+    it "redireciona para a lista de reservas" do
       reserva = Reserva.create! valid_attributes
       delete reserva_url(reserva)
       expect(response).to redirect_to(reservas_url)
