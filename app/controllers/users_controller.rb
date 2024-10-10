@@ -1,3 +1,7 @@
 class UsersController < BaseController
-  # Herda toda a funcionalidade CRUD do BaseController
+  private
+
+  def resource_params
+    params.require(:user).permit(:nome, :email, :password, :role) 
+  end
 end

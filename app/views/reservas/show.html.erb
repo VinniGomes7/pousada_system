@@ -1,8 +1,9 @@
-<h1>Reserva</h1>
-<p><strong>Hóspede:</strong> <%= @reserva.hospede.nome %></p>
-<p><strong>Quarto:</strong> <%= @reserva.quarto.numero %></p>
-<p><strong>Data de Entrada:</strong> <%= @reserva.data_entrada %></p>
-<p><strong>Data de Saída:</strong> <%= @reserva.data_saida %></p>
+<h1>Detalhes da Reserva</h1>
 
-<%= link_to 'Editar', edit_reserva_path(@reserva) %>
+<p><strong>Hóspede:</strong> <%= @resource.hospede.nome %></p>
+<p><strong>Quarto:</strong> <%= @resource.quarto.numero %></p>
+<p><strong>Data de Entrada:</strong> <%= @resource.data_entrada %></p>
+<p><strong>Data de Saída:</strong> <%= @resource.data_saida %></p>
+
+<%= link_to 'Editar', edit_reserva_path(@resource) %> |
 <%= link_to 'Voltar', reservas_path %>

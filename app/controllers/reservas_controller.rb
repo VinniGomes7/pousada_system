@@ -1,3 +1,7 @@
 class ReservasController < BaseController
-  # Herda toda a funcionalidade CRUD do BaseController
+  private
+
+  def resource_params
+    params.require(:reserva).permit(:data_entrada, :data_saida, :hospede_id, :quarto_id)
+  end
 end

@@ -1,27 +1,37 @@
-<%= form_with(model: reserva, local: true) do |form| %>
-  <div>
+<%= form_with model: @resource do |form| %>
+  <% if @resource.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@resource.errors.count, "erro") %> proibiu esta reserva de ser salva:</h2>
+
+      <ul>
+        <% @resource.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
     <%= form.label :hospede_id, "Hóspede" %>
     <%= form.collection_select :hospede_id, Hospede.all, :id, :nome %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :quarto_id, "Quarto" %>
     <%= form.collection_select :quarto_id, Quarto.all, :id, :numero %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :data_entrada %>
-    <%= form.date_select :data_entrada %>
+    <%= form.date_field :data_entrada %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :data_saida %>
-    <%= form.date_select :data_saida %>
+    <%= form.date_field :data_saida %>
   </div>
 
-  <div>
+  <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
-
-<%= link_to 'Voltar', reservas_path %>

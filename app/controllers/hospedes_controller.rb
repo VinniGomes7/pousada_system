@@ -1,70 +1,47 @@
-class HospedesController < ApplicationController
-  before_action :set_hospede, only: %i[show edit update destroy]
-
-  # GET /hospedes or /hospedes.json
+class HospedesController < BaseController
   def index
     @hospedes = Hospede.all
   end
 
-  # GET /hospedes/1 or /hospedes/1.json
   def show
+    @hospede = Hospede.find(params[:id])
   end
 
-  # GET /hospedes/new
   def new
     @hospede = Hospede.new
   end
 
-  # GET /hospedes/1/edit
-  def edit
-  end
-
-  # POST /hospedes or /hospedes.json
   def create
-    @hospede = Hospede.new(hospede_params)
-
-    respond_to do |format|
-      if @hospede.save
-        format.html { redirect_to @hospede, notice: "Hóspede foi criado com sucesso." }
-        format.json { render :show, status: :created, location: @hospede }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @hospede.errors, status: :unprocessable_entity }
-      end
+    @hospede = Hospede.new(resource_params)
+    if @hospede.save
+      redirect_to hospedes_path, notice: 'Hóspede criado com sucesso.'
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /hospedes/1 or /hospedes/1.json
+  def edit
+    @hospede = Hospede.find(params[:id])
+  end
+
   def update
-    respond_to do |format|
-      if @hospede.update(hospede_params)
-        format.html { redirect_to @hospede, notice: "Hóspede foi atualizado com sucesso." }
-        format.json { render :show, status: :ok, location: @hospede }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @hospede.errors, status: :unprocessable_entity }
-      end
+    @hospede = Hospede.find(params[:id])
+    if @hospede.update(resource_params)
+      redirect_to hospedes_path, notice: 'Hóspede atualizado com sucesso.'
+    else
+      render :edit
     end
   end
 
-  # DELETE /hospedes/1 or /hospedes/1.json
   def destroy
+    @hospede = Hospede.find(params[:id])
     @hospede.destroy
-    respond_to do |format|
-      format.html { redirect_to hospedes_url, notice: "Hóspede foi excluído com sucesso.", status: :see_other }
-      format.json { head :no_content }
-    end
+    redirect_to hospedes_path, notice: 'Hóspede removido com sucesso.'
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_hospede
-    @hospede = Hospede.find(params[:id])
-  end
-
-  # Only allow a list of trusted parameters through.
-  def hospede_params
+  def resource_params
     params.require(:hospede).permit(:nome, :documento, :email, :telefone, :endereco)
   end
 end

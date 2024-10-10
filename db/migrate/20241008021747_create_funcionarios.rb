@@ -6,6 +6,7 @@ class CreateFuncionarios < ActiveRecord::Migration[7.0]
       t.string :email
       t.string :cargo
       t.string :telefone
+      t.decimal :salario, precision: 10, scale: 2 # Adicionando o campo salario
 
       t.timestamps
     end

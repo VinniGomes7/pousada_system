@@ -1,32 +1,47 @@
-<%= form_with(model: funcionario, local: true) do |form| %>
-  <div>
+<%= form_with(model: @funcionario, local: true) do |form| %>
+  <% if @funcionario.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@funcionario.errors.count, "erro") %> impediram que este funcionário fosse salvo:</h2>
+
+      <ul>
+      <% @funcionario.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
     <%= form.label :nome %>
     <%= form.text_field :nome %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :documento %>
     <%= form.text_field :documento %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :email %>
-    <%= form.text_field :email %>
+    <%= form.email_field :email %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :telefone %>
-    <%= form.text_field :telefone %>
+    <%= form.telephone_field :telefone %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :cargo %>
     <%= form.text_field :cargo %>
   </div>
 
-  <div>
+  <div class="field">
+    <%= form.label :salario %>
+    <%= form.number_field :salario %>
+  </div>
+
+  <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
-
-<%= link_to 'Voltar', funcionarios_path %>

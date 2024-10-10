@@ -7,7 +7,7 @@ class Reserva < ApplicationRecord
   validate :data_saida_maior_que_entrada
 
   def data_saida_maior_que_entrada
-    if data_saida <= data_entrada
+    if data_saida.present? && data_entrada.present? && data_saida <= data_entrada
       errors.add(:data_saida, "deve ser maior que a data de entrada")
     end
   end

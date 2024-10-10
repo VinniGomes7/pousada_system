@@ -1,5 +1,7 @@
-<h1><%= @user.nome %></h1>
-<p><strong>Email:</strong> <%= @user.email %></p>
+<h1><%= @resource.nome %></h1>
 
-<%= link_to 'Editar', edit_user_path(@user) %>
+<p><strong>Email:</strong> <%= @resource.email %></p>
+<p><strong>Função:</strong> <%= @resource.role %></p>
+
+<%= link_to 'Editar', edit_user_path(@resource) %> |
 <%= link_to 'Voltar', users_path %>

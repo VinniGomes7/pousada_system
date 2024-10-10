@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
+  # Remover a linha do Devise
+  # devise_for :users
+  
+  # Manter as rotas existentes
   resources :users
   resources :quartos
   resources :reservas
   resources :funcionarios
   resources :hospedes
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  # Define a rota root para a página inicial
+  root "hospedes#index"
 end

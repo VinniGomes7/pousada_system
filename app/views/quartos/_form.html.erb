@@ -1,22 +1,38 @@
-<%= form_with(model: quarto, local: true) do |form| %>
-  <div>
+<h1><%= @quarto.new_record? ? 'Novo Quarto' : 'Editar Quarto' %></h1>
+
+<%= form_with model: @quarto do |form| %>
+  <% if @quarto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@quarto.errors.count, "erro") %> proibiu este quarto de ser salvo:</h2>
+      <ul>
+        <% @quarto.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
     <%= form.label :numero %>
     <%= form.text_field :numero %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :descricao %>
     <%= form.text_area :descricao %>
   </div>
 
-  <div>
-    <%= form.label :preco_diaria, "Preço por Diária" %>
+  <div class="field">
+    <%= form.label :preco_diaria %>
     <%= form.number_field :preco_diaria %>
   </div>
 
-  <div>
+  <div class="field">
+    <%= form.label :capacidade_maxima %>
+    <%= form.number_field :capacidade_maxima %>
+  </div>
+
+  <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
-
-<%= link_to 'Voltar', quartos_path %>

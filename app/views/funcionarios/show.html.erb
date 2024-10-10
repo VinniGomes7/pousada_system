@@ -1,8 +1,9 @@
-<h1><%= @funcionario.nome %></h1>
-<p><strong>Documento:</strong> <%= @funcionario.documento %></p>
-<p><strong>Email:</strong> <%= @funcionario.email %></p>
-<p><strong>Telefone:</strong> <%= @funcionario.telefone %></p>
-<p><strong>Cargo:</strong> <%= @funcionario.cargo %></p>
+<h1><%= @resource.nome %></h1>
 
-<%= link_to 'Editar', edit_funcionario_path(@funcionario) %>
+<p><strong>Documento:</strong> <%= @resource.documento %></p>
+<p><strong>Email:</strong> <%= @resource.email %></p>
+<p><strong>Telefone:</strong> <%= @resource.telefone %></p>
+<p><strong>Cargo:</strong> <%= @resource.cargo %></p>
+
+<%= link_to 'Editar', edit_funcionario_path(@resource) %> |
 <%= link_to 'Voltar', funcionarios_path %>
