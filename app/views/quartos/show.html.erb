@@ -1,7 +1,7 @@
-<h1>Detalhes do Quarto <%= @resource.numero %></h1>
+<h1>Detalhes do Quarto <%= @quarto.numero %></h1>
 
-    <p><strong>Descrição:</strong> <%= @resource.descricao %></p>
-    <p><strong>Preço da Diária:</strong> <%= number_to_currency(@resource.preco_diaria) %></p>
+    <p><strong>Descrição:</strong> <%= @quarto.descricao %></p>
+    <p><strong>Preço da Diária:</strong> <%= number_to_currency(@quarto.preco_diaria) %></p>
     
-    <%= link_to 'Editar', edit_quarto_path(@resource) %> |
+    <%= link_to 'Editar', edit_quarto_path(@quarto) %> |
     <%= link_to 'Voltar', quartos_path %>    
