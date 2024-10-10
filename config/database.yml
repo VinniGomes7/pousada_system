@@ -20,8 +20,8 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: postgres           # Define o nome de usuário do PostgreSQL
-  password: adm123             # Substitua pela sua senha
+  username: postgres          # Mantenha o usuário como 'postgres'
+  password: adm123            # Mantenha a senha como 'adm123'
   host: localhost              # Conexão via localhost
 
 development:
@@ -38,5 +38,7 @@ test:
 production:
   <<: *default
   database: pousada_system_production
-  username: pousada_system
-  password: <%= ENV["POUSADA_SYSTEM_DATABASE_PASSWORD"] %>
+  # Aqui, não é necessário alterar o usuário e a senha, mas se
+  # você pretende usar um usuário diferente em produção, pode
+  # configurar aqui. Certifique-se de que o banco de dados
+  # "pousada_system_production" existe.
